@@ -7,13 +7,12 @@ import EmployeeAddPage from './pages/EmployeeAddPage';
 import EmployeeEditPage from './pages/EmployeeEditPage';
 import EmployeeDetailPage from './pages/EmployeeDetailPage';
 import ProtectedRoute from './components/ProtectedRoute';
-import './index.css'; // Убедитесь, что стили подключены
+import './index.css'; 
 
 function App() {
   return (
     <Router>
-      {/* Можно добавить общий Header/Navbar здесь, если нужно */}
-      <div style={{ padding: '20px' }}> {/* Добавим отступы для контента */}
+      <div style={{ padding: '20px' }}>
         <Routes>
           {/* Страница входа */}
           <Route path="/login" element={<LoginPage />} />
