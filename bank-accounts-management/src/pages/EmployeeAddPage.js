@@ -43,7 +43,6 @@ function EmployeeAddPage() {
         const errorData = await response.json().catch(() => ({})); // Попытка получить JSON ошибки
         throw new Error(errorData.message || `Failed to add employee. Status: ${response.status}`);
       }
-      // const newEmployee = await response.json(); // Можно получить добавленный объект
       navigate('/'); // Перенаправляем на главную после успеха
 
     } catch (error) {

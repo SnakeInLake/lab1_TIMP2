@@ -59,12 +59,9 @@ function EmployeesListPage() {
         }
         // Обновляем список после успешного удаления, перезапросив данные
         fetchEmployees();
-        // Или оптимистичное обновление:
-        // setEmployees(employees.filter(emp => emp.id !== employeeId));
       } catch (error) {
         console.error("Error deleting employee:", error);
         setError('Не удалось удалить сотрудника. ' + error.message);
-        // Можно показать более user-friendly сообщение
       }
     }
   };
@@ -75,11 +72,11 @@ function EmployeesListPage() {
   };
 
   if (loading) {
-    return <div>Loading employees...</div>; // Можно добавить спиннер
+    return <div>Loading employees...</div>; 
   }
 
   if (error) {
-    return <div className="error">Error: {error}</div>; // Отображаем ошибку
+    return <div className="error">Error: {error}</div>; 
   }
 
   return (

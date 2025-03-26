@@ -2,10 +2,10 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect, useCallback } from 'react';
-import '../index.css'; // Подключаем стили
+import '../index.css'; 
 
 function EmployeeEditPage() {
-  const { id } = useParams(); // Получаем ID из URL
+  const { id } = useParams(); 
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [position, setPosition] = useState('');
@@ -27,7 +27,7 @@ function EmployeeEditPage() {
           const employee = await response.json();
           setName(employee.name);
           setPosition(employee.position);
-          setDetails(employee.details || ''); // Убедимся, что details не undefined
+          setDetails(employee.details || ''); 
       } catch (error) {
           console.error("Error fetching employee data:", error);
           setErrors({ load: error.message });
@@ -45,7 +45,7 @@ function EmployeeEditPage() {
     const validationErrors = {};
     if (!name.trim()) validationErrors.name = 'Имя обязательно';
     if (!position.trim()) validationErrors.position = 'Должность обязательна';
-    setErrors(prev => ({ ...prev, ...validationErrors })); // Добавляем ошибки валидации, не стирая ошибки загрузки
+    setErrors(prev => ({ ...prev, ...validationErrors })); 
     return Object.keys(validationErrors).length === 0;
   };
 
@@ -115,8 +115,6 @@ function EmployeeEditPage() {
           <button type="button" className="button button-delete" onClick={() => navigate(`/detail/${id}`)} disabled={isSubmitting} style={{ marginLeft: '10px' }}>
             Отмена
           </button>
-           {/* Или кнопка "Назад" */}
-           {/* <button type='button' onClick={() => navigate(-1)} className="button" style={{ marginLeft: '10px' }}>Назад</button> */}
         </div>
       </form>
     </div>
