@@ -7,18 +7,12 @@ function EmployeesListPage() {
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [sortBy, setSortBy] = useState(null);
-  const [sortOrder, setSortOrder] = useState('asc');
   const navigate = useNavigate();
 
   const fetchEmployees = useCallback(async () => {
     setLoading(true);
     setError(null);
-    let url = 'http://localhost:5000/employees'; // URL для json-server
-
-    if (sortBy) {
-      url += `?_sort=${sortBy}&_order=${sortOrder}`; // Параметры сортировки для json-server
-    }
+    const url = 'http://localhost:5000/employees';
 
     try {
       const response = await fetch(url);
@@ -33,20 +27,11 @@ function EmployeesListPage() {
     } finally {
       setLoading(false);
     }
-  }, [sortBy, sortOrder]);
+  }, []); 
 
   useEffect(() => {
     fetchEmployees();
-  }, [fetchEmployees]); // Зависимость от fetchEmployees (которая зависит от sortBy, sortOrder)
-
-  const handleSort = (columnName) => {
-    if (sortBy === columnName) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSortBy(columnName);
-      setSortOrder('asc');
-    }
-  };
+  }, [fetchEmployees]);
 
   const handleDelete = async (employeeId) => {
     if (window.confirm("Вы уверены, что хотите удалить данного сотрудника?")) {
@@ -57,7 +42,7 @@ function EmployeesListPage() {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        // Обновляем список после успешного удаления, перезапросив данные
+        // Обновляем список после успешного удаления
         fetchEmployees();
       } catch (error) {
         console.error("Error deleting employee:", error);
@@ -72,11 +57,11 @@ function EmployeesListPage() {
   };
 
   if (loading) {
-    return <div>Loading employees...</div>; 
+    return <div>Loading employees...</div>;
   }
 
   if (error) {
-    return <div className="error">Error: {error}</div>; 
+    return <div className="error">Error: {error}</div>;
   }
 
   return (
@@ -89,15 +74,9 @@ function EmployeesListPage() {
       <table>
         <thead>
           <tr>
-            <th onClick={() => handleSort('id')} style={{ cursor: 'pointer' }}>
-              ID {sortBy === 'id' && (sortOrder === 'asc' ? '▲' : '▼')}
-            </th>
-            <th onClick={() => handleSort('name')} style={{ cursor: 'pointer' }}>
-              Имя {sortBy === 'name' && (sortOrder === 'asc' ? '▲' : '▼')}
-            </th>
-            <th onClick={() => handleSort('position')} style={{ cursor: 'pointer' }}>
-              Должность {sortBy === 'position' && (sortOrder === 'asc' ? '▲' : '▼')}
-            </th>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Должность</th>
             <th>Действие</th>
           </tr>
         </thead>
