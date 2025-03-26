@@ -1,0 +1,22 @@
+{
+  "employees": [
+    {
+      "id": "2",
+      "name": "Мария Петрова",
+      "position": "Тестировщик",
+      "details": "QA Engineer с опытом автоматизации на Python."
+    },
+    {
+      "id": "3",
+      "name": "Сергей Сидоров",
+      "position": "Менеджер проектов",
+      "details": "Управляет командой разработки мобильного приложения."
+    },
+    {
+      "id": "bb1f",
+      "name": "New Employee",
+      "position": "Tester",
+      "details": "Some details"
+    }
+  ]
+}
